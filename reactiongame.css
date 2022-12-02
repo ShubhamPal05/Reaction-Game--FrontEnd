@@ -1,0 +1,51 @@
+/* styling background */
+body{
+    background-color: rgb(33, 33, 33);
+    color:aqua;
+    margin: auto;
+}
+header {
+    text-align: center;
+    margin: 00.5rem;
+}
+
+.shape {
+    font-weight: 500;
+    display: none;
+    /* making positin sticky so that it does not skip the frame */
+    position: sticky; 
+    left: 20%;
+    top: 40%;
+    border: 1px;
+    border-radius: 5%;
+    height: 8%;
+    width: 8%;
+    /* animates when changes the position */
+    transition: all 500ms ease;
+}
+
+.timeBar{
+    padding: 0px;
+    width:100%;
+    background-color: rgb(133, 0, 0);
+    margin-right: auto;
+    border: none;
+    border-radius: 0.1rem;
+    outline: none;
+}
+
+.timeRemaining {
+    padding: 0px;
+    display: flex;
+}
+
+.frame {
+    background-color: rgb(16, 16, 16);
+}
+
+/* styling start and Reset buttons */
+.btn * {
+    background-color: aqua;
+    border-radius: 2px;
+    border: none;
+}
