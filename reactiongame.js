@@ -1,10 +1,12 @@
 //creating const variables for use;
 const start= document.querySelector('.startbtn');
-const reset= document.querySelector('.resetbtn');
+const stop= document.querySelector('.stopbtn');
 const shape= document.querySelector('.shape');
 const score= document.querySelector('.score');
 const frame= document.querySelector('.frame');
-const timeBar= document.querySelector('.timeBar');
+
+stop.disabled=true;
+
 //making with and height equal to the windows with for proper responsiveness;
 const width=window.innerWidth;
 const height= window.innerHeight;
@@ -29,28 +31,21 @@ function generateRandom(min, max) {
 const startGame = () =>{
     shape.style.display='block';
     start.disabled = true;
-    reset.disabled = false;
+    stop.disabled = false;
     previousTime = Date.now();
     timeRemaining(0);
 }
 
-const timeBarReset = () => {
-    timeBar.style.transitionDuration='0ms';
-    timeBar.style.width='100%';
-}
-
-//function to reset game;
-const resetGame = () =>{
+//function to stop game;
+const stopGame = () =>{
     score.innerHTML= "Average Reaction Time: " + (totalTime/totalClicks).toPrecision(3) + " sec";
     start.disabled=false;
-    reset.disabled=true;
+    stop.disabled=true;
     shape.style.display='none';
-    timeBarReset();
     totalClicks=0, currentTime, totalTime=0, previousTime = 0;
 }
 
 const shapeClicked = () => {
-    timeBarReset();
     totalClicks++;
     score.innerHTML= "Reaction Time: " + (Date.now()-previousTime)/1000 + " sec";
     totalTime += (Date.now()-previousTime)/1000;
@@ -67,22 +62,6 @@ const shapeClicked = () => {
     shape.style.width=`${width*0.08}px`;
     shape.style.borderRadius=`${newRadius}%`;
     shape.style.backgroundColor=`rgb( ${generateRandom(0,255)}, ${generateRandom(0,255)}, ${generateRandom(0,255)})`;
-    timeRemaining(totalClicks);
-}
-
-function timeRemaining(clicks) {
-    timeBar.style.transitionDuration='2000ms';
-    timeBar.style.width='0%';
-    setTimeout(() => {
-        if(clicks != totalClicks){
-            return;
-        }
-        else if(clicks == 0){//if user don't click even after 2 sec of clicking startbutton then this alert will be generated;
-            window.alert('please click on the shape appeared within 2 second !!');
-        }
-        else
-            resetGame();
-    }, 2000);
 }
 
 //function to make object size-blink;
@@ -102,4 +81,4 @@ setInterval( () => {
 
 start.addEventListener('click', startGame);
 shape.addEventListener('click', shapeClicked);
-reset.addEventListener('click', resetGame);
+stop.addEventListener('click', stopGame);
